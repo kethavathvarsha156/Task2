@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Intermediate Project</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f0f2f5;
+      color: #222;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffd369;
+    }
+
+    /* Layout */
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 25px;
+      padding: 30px;
+    }
+
+    .content, .sidebar {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .content h2, .sidebar h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    /* Contact Form */
+    form label {
+      margin: 8px 0 5px;
+      font-weight: 500;
+    }
+
+    form input, form textarea {
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    form button {
+      padding: 12px;
+      background: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: #1a5cd7;
+    }
+
+    .error {
+      color: crimson;
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+    }
+
+    /* To-Do List */
+    #todo-app input {
+      width: 70%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #todo-app button {
+      padding: 10px 15px;
+      margin-left: 5px;
+      background: #6a11cb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    #todo-app ul {
+      margin-top: 15px;
+      list-style: none;
+      padding: 0;
+    }
+
+    #todo-app li {
+      background: #f7f7f7;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    #todo-app li button {
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* Image Gallery */
+    #gallery input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 70%;
+    }
+
+    #gallery button {
+      padding: 10px 15px;
+      margin-left: 5px;
+      background: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    #galleryContainer {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .gallery-item {
+      position: relative;
+      display: inline-block;
+    }
+
+    .gallery-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-item button {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: crimson;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 18px;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#form">Contact</a></li>
+        <li><a href="#todo">To-Do</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Main Content -->
+    <div class="content">
+      <section id="about">
+        <h2>About Me</h2>
+        <p>This portfolio is a reflection of my journey in web development. It features a responsive design, 
+    a contact form with validation, a dynamic to-do list, and an interactive image gallery — all built 
+    with clean code and a focus on user experience.</p>
+      </section>
+
+      <section id="form">
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <span class="error" id="nameError"></span>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <span class="error" id="emailError"></span>
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+          <span class="error" id="messageError"></span>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- To-Do List -->
+      <section id="todo">
+        <h2>My To-Do List</h2>
+        <div id="todo-app">
+          <input type="text" id="taskInput" placeholder="Enter new task...">
+          <button onclick="addTask()">Add</button>
+          <ul id="taskList"></ul>
+        </div>
+      </section>
+
+      <!-- Image Gallery -->
+      <section id="gallery">
+        <h2>My Image Gallery</h2>
+        <input type="text" id="imageUrl" placeholder="Enter image URL...">
+        <button onclick="addImage()">Add Image</button>
+        <div id="galleryContainer"></div>
+      </section>
+    </aside>
+  </div>
+
+  <script>
+    // Form Validation
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
+
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const messageError = document.getElementById('messageError');
+
+      nameError.textContent = '';
+      emailError.textContent = '';
+      messageError.textContent = '';
+
+      if (name.value.trim() === '') {
+        nameError.textContent = 'Name is required';
+        valid = false;
+      }
+      if (email.value.trim() === '' || !/^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email.value)) {
+        emailError.textContent = 'Enter a valid email';
+        valid = false;
+      }
+      if (message.value.trim() === '') {
+        messageError.textContent = 'Message cannot be empty';
+        valid = false;
+      }
+
+      if (valid) {
+        alert('Form submitted successfully!');
+        form.reset();
+      }
+    });
+
+    // To-Do List
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+      if (taskInput.value.trim() !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `${taskInput.value} <button onclick="removeTask(this)">X</button>`;
+        taskList.appendChild(li);
+        taskInput.value = '';
+      }
+    }
+
+    function removeTask(button) {
+      button.parentElement.remove();
+    }
+
+    // Image Gallery Add & Remove
+    function addImage() {
+      const imageUrl = document.getElementById('imageUrl').value.trim();
+      const galleryContainer = document.getElementById('galleryContainer');
+
+      if (imageUrl !== '') {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = "User uploaded";
+
+        const btn = document.createElement('button');
+        btn.textContent = "×";
+        btn.onclick = () => div.remove();
+
+        div.appendChild(img);
+        div.appendChild(btn);
+        galleryContainer.appendChild(div);
+
+        document.getElementById('imageUrl').value = '';
+      } else {
+        alert('Please enter a valid image URL!');
+      }
+    }
+  </script>
+</body>
+</html>
